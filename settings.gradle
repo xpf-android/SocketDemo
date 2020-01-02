@@ -1,2 +1,2 @@
-include ':app', ':SimpleSocket'
+include ':app', ':SimpleSocket', ':SimpleChatRoom'
 rootProject.name='SocketDemo'
