@@ -10,6 +10,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/SimpleChatRoom" />
             <option value="$PROJECT_DIR$/SimpleSocket" />
+            <option value="$PROJECT_DIR$/SimpleUdp" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>
