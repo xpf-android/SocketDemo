@@ -68,7 +68,7 @@ public class ChatServer {
          */
         public void sendMsg() {
             int num = mClients.size();
-            //向服务器写信息
+            //向客户端写信息
             OutputStream os = null;
             try {
                 os = socket.getOutputStream();
@@ -86,7 +86,7 @@ public class ChatServer {
             while (true) {
                 try {
                     if ((msg = br.readLine()) != null) {
-                        System.out.print("客户端说：" + msg);
+                        System.out.println("客户端说：" + msg);
                         if ("bye".equals(msg)) {//应用自己定义的协议
                             socket.close();
                             break;

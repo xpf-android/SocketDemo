@@ -23,7 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class ChatRoomClientActivity extends AppCompatActivity {
 
     @BindView(R.id.tv_ip)
     TextView mTextViewIp;
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_chat_room_client);
         ButterKnife.bind(this);
         mTextViewIp.setText(NetworkUtils.getIPAddress(this));
         sb = new StringBuilder();
