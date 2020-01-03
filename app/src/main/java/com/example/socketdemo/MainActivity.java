@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean writerFlag = false;
 
-    private LinkedBlockingQueue<String> msgs = new LinkedBlockingQueue<>();
+    private LinkedBlockingQueue<String> queues = new LinkedBlockingQueue<>();
 
     //定义一个handler对象,用来刷新界面
     public  Handler handler = new Handler() {
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                 if (socket.isConnected() && !socket.isOutputShutdown()) {
 
                     try {
-                        out.println(msgs.take());
+                        out.println(queues.take());
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
 
         String msg = mEditTextSend.getText().toString();
         try {
-            msgs.put(msg);
+            queues.put(msg);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
