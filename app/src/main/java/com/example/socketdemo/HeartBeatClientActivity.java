@@ -33,6 +33,7 @@ public class HeartBeatClientActivity extends AppCompatActivity {
     @BindView(R.id.et_send)
     EditText etSend;
 
+
     private Intent mServiceIntent;
 
     private ISocket iSocket;
@@ -55,22 +56,22 @@ public class HeartBeatClientActivity extends AppCompatActivity {
         private WeakReference<TextView> textView;
 
         public MessageBackReceiver(TextView tv) {
-            textView = new WeakReference<TextView>(tv);
+//            textView = new WeakReference<TextView>(tv);
         }
 
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            TextView tv = textView.get();
+//            TextView tv = textView.get();
             if (action.equals(SocketService.HEART_BEAT_ACTION)) {
-                if (null != tv) {
+//                if (null != tv) {
                     Log.i(TAG, "Get a heart heat");
-                    tv.setText("Get a heart heat");
-                }
+                    tvShow.setText("Get a heart heat");
+//                }
             } else {
                 Log.i(TAG, "Get a heart heat");
                 String message = intent.getStringExtra("message");
-                tv.setText("服务器消息:" + message);
+                tvShow.setText("服务器消息:" + message);
             }
         }
 

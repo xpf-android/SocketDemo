@@ -181,7 +181,7 @@ public class SocketService extends Service {
             if (null != socket) {
                 try {
                     InputStream is = socket.getInputStream();
-                    byte[] buffer = new byte[1024 * 4];
+                    byte[] buffer = new byte[1024*4];
                     int length = 0;
                     while (!socket.isClosed() && !socket.isInputShutdown()
                             && isStart && ((length = is.read(buffer)) != -1)) {

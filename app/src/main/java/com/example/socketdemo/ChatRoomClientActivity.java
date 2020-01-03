@@ -25,17 +25,19 @@ import butterknife.OnClick;
 
 public class ChatRoomClientActivity extends AppCompatActivity {
 
+
     @BindView(R.id.tv_ip)
-    TextView mTextViewIp;
+    TextView tvIp;
     @BindView(R.id.tv_show)
-    TextView mTextViewShow;
+    TextView tvShow;
     @BindView(R.id.et_send)
-    EditText mEditTextSend;
+    EditText etSend;
 
     //定义相关变量,完成初始化
     private static final String HOST = "192.168.1.125";
     //    private static final String HOST = "169.254.177.122";
     private static final int PORT = 10065;
+
 
     private Socket socket = null;
     private BufferedReader in = null;
@@ -48,11 +50,11 @@ public class ChatRoomClientActivity extends AppCompatActivity {
     private LinkedBlockingQueue<String> queues = new LinkedBlockingQueue<>();
 
     //定义一个handler对象,用来刷新界面
-    public  Handler handler = new Handler() {
+    public Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             if (msg.what == 0x123) {
                 sb.append(content);
-                mTextViewShow.setText(sb.toString());
+                tvShow.setText(sb.toString());
             }
         }
     };
@@ -62,12 +64,13 @@ public class ChatRoomClientActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room_client);
         ButterKnife.bind(this);
-        mTextViewIp.setText(NetworkUtils.getIPAddress(this));
+//        ButterKnife.bind(this);
+        tvIp.setText(NetworkUtils.getIPAddress(this));
         sb = new StringBuilder();
 
         //网络操作不能放在UI主线程4.0之后
-        new Thread(){
-            public void run(){
+        new Thread() {
+            public void run() {
                 try {
                     //和服务器连接
                     socket = new Socket(HOST, PORT);
@@ -122,7 +125,7 @@ public class ChatRoomClientActivity extends AppCompatActivity {
                      * BufferedOutputStream的每一次write其实是将内容写入byte[]，当buffer容量到达上限时，会触发真正的磁盘写入。
                      * 而另一种触发磁盘写入的办法就是调用flush()了。
                      */
-                   out.flush();
+                    out.flush();
 
 
                 }
@@ -134,18 +137,18 @@ public class ChatRoomClientActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_send)
     public void onClick() {
-        if(!writerFlag){
+        if (!writerFlag) {
             new Thread(writeRunnable).start();
         }
         writerFlag = true;
 
-        String msg = mEditTextSend.getText().toString();
+        String msg = etSend.getText().toString();
         try {
             queues.put(msg);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-
     }
+
+
 }
