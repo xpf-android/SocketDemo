@@ -37,8 +37,11 @@ public class ChatServer {
             mExec = Executors.newCachedThreadPool();
             Socket client = null;
             while (true) {
+                System.out.println("等待客户上门...");
                 client = server.accept();
+                System.out.println("有客户来了，客户是：" + client.getInetAddress());
                 mClients.add(client);
+                mExec.execute(new Service(client));
             }
         } catch (IOException e) {
             e.printStackTrace();
